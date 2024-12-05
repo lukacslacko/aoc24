@@ -1,4 +1,4 @@
-data =: <;._1 LF, (#~ CR&~:) 1!:1 < 'day5_apa.txt'
+data =: <;._1 LF, (#~ CR&~:) 1!:1 < 'day5.txt'
 parts =: <;._1 (<''),data
 rule_lines =: >0{parts
 update_lines =: >1{parts
