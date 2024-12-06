@@ -27,5 +27,5 @@ next_state =: {{
   
 initial_state =: < (dir input); pos input
 states =: input next_state^:_ initial_state
-result_1 =: # ~. > {:"1 > states
-  
+visited_positions =: ~. > {:"1 > states
+result_1 =: # visited_positions
