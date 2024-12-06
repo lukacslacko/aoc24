@@ -12,7 +12,7 @@ next_state =: {{
   r =. <.p%N
   c =. p - r*N
   stays_on_board =. -.+./ ((d='<')*.c=0), ((d='>')*.c=N-1), ((d='^')*.r=0), ((d='v')*.r=N-1)  
-  if. stays_on_board *. -. ({:y) e. }:y do.
+  if. stays_on_board *. -. ({: e. }:) y do.
     next_pos =. p + (_1, 1, (-N), N) {~ '<>^v' i. d
     if. '#' = next_pos { x do.
       result =. y, < ('^v><' {~ '<>^v' i. d) ; p
