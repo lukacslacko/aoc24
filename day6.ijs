@@ -1,4 +1,4 @@
-data =: (#~0<#@>) <;._1 LF,(1!:1 < 'day6_apa.txt')-.CR
+data =: (#~0<#@>) <;._1 LF,(1!:1 < 'day6.txt')-.CR
 n =: #data
 input =: ,>data
 dir =: -.&'X.#'
@@ -30,12 +30,12 @@ states =: input next_state^:_ initial_state
 visited_positions =: , ~. > {:"1 > states
 result_1 =: # visited_positions
 
-visited_empty_positions =: visited_positions #~ '.' = visited_positions { input
+visited_empty_positions =: visited_positions ( [ #~ '.' = [{] ) input
 
 loopy =: {{
   field =. '#' y}x
   states =. field next_state^:_ initial_state
-  result =. ({: states) e. }: states
+  result =. ({: e. }:) states
   result
 }}
 
@@ -50,4 +50,4 @@ calc_2 =: {{
   result
 }}
 
-result_2 =: calc_2 _
+NB. result_2 =: calc_2 _
