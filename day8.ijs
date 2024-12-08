@@ -1,5 +1,10 @@
-data =: [;._1 LF,CR-.~1!:1 < 'day8.txt'
+data =: [;._1 LF,CR-.~1!:1 < 'day8_apa.txt'
 size =: #data
-coords =: ,{;~i.size
+indices =: i.size
+coords =: ,{;~ indices
 grouped_coords =: (,data) </. coords
 stations =: ('.' ~: ~.,data) # grouped_coords
+pairsfn =: [:, [:{ ;/ ,. 1&(<\.)
+antinode =: {{ y&{{ ({.+{.-{:) > y{x }} &.> ,. (pairsfn i.#y) }}
+antinodes =: {."1 ; antinode &.> stations
+result_1 =: # coords -. coords -. antinodes
