@@ -14,6 +14,3 @@ sum_leftright =: [: +/ ((1 _1)&(|.!.0"0 _))
 sum_neighbors =: sum_leftright + sum_leftright &. |:
 sumstep =: {{ (x=data) * sum_neighbors y }}
 result_2 =: +/, state ]F.: sumstep i.9
-
-d=."."0;._1 LF,CR-.~1!:1<'day10.txt'
-r=:+/(9=d),F.:((d=[)*[:([:+/(1 _1)&(|.!.0"0 _))1 :'u+u&.|:'])i.9
