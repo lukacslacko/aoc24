@@ -1,0 +1,28 @@
+data =: 6571 0 5851763 526746 23 69822 9 989
+
+state =: ;/1,.data
+
+l =: 10#.]{.~[:-:#
+r =: 10#.]}.~[:-:#
+c =: ((((l;r)`(2024*10&#.))@.(2:|#))@(10&(#.^:_1)@{:)`({.,1:))@.(0={:)
+
+change =: {{
+  freq =. {.y
+  stone =. {:y
+  if. stone = 0 do.
+    freq, 1 return.
+  end.
+  digits =. 10 (#.^:_1) stone
+  if. 2 | #digits do.
+    freq, stone * 2024 return.
+  end.
+  freq&,&.> (-:#digits) ((10#.{.);10#.}.) digits  
+}}
+
+step =: {{ ;/ ]S:0 change &.> y }}
+
+aggregate =: {{ ;/ ({:"1>y) ((+/@]),[) /.. {."1>y }}
+
+iter =: aggregate @ step
+
+result_1 =: +/ {."1 > iter^:25 state
