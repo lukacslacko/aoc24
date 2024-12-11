@@ -12,7 +12,7 @@ next_state =: {{
   r =. <.p%N
   c =. p - r*N
   stays_on_board =. -.+./ ((d='<')*.c=0), ((d='>')*.c=N-1), ((d='^')*.r=0), ((d='v')*.r=N-1)  
-  if. stays_on_board do.
+  if. stays_on_board *. -. ({: e. }:) y do.
     next_pos =. p + (_1, 1, (-N), N) {~ '<>^v' i. d
     if. '#' = next_pos { x do.
       result =. y, < ('^v><' {~ '<>^v' i. d) ; p
@@ -27,5 +27,27 @@ next_state =: {{
   
 initial_state =: < (dir input); pos input
 states =: input next_state^:_ initial_state
-visited_positions =: ~. > {:"1 > states
+visited_positions =: , ~. > {:"1 > states
 result_1 =: # visited_positions
+
+visited_empty_positions =: visited_positions ( [ #~ '.' = [{] ) input
+
+loopy =: {{
+  field =. '#' y}x
+  states =. field next_state^:_ initial_state
+  result =. ({: e. }:) states
+  result
+}}
+
+calc_2 =: {{
+  result =. 0
+  for_ijk. visited_empty_positions do.
+    if. input loopy ijk do.
+      result =. result + 1
+    end.
+    echo (#visited_empty_positions), ijk_index, result, ijk
+  end.
+  result
+}}
+
+NB. result_2 =: calc_2 _
