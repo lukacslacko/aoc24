@@ -1,4 +1,4 @@
-data =: 1!:1 < 'day3_apa.txt'
+data =: 1!:1 < 'day3.txt'
 suffixes =: ]\.data
 good_start =: [: 'mul('&-: 4{. [
 rest =: 4&}.
