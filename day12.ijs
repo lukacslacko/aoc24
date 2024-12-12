@@ -1,4 +1,4 @@
-data =: [;._1 LF,CR-.~1!:1 < 'day12.txt'
+data =: [;._1 LF,CR-.~1!:1 < 'day12_apa.txt'
 num =: #data
 square =: (num,num)&$
 
@@ -17,3 +17,16 @@ split_region =: {{
   (region;>{.y);(region}letters,:square '.')
 }}
  
+regions =: }:>>{.split_region^:{{-.*./'.'=,>{:y}}^:_. a:;data
+
+fence =: {{
+  +/ (0,y)~:(y,0)
+}}
+
+score =: {{
+  area =. +/,y
+  circum =. (+/ fence"1 y) + +/ fence"1 |:y
+  area*circum
+}}
+
+result_1 =: +/ score"2 regions
