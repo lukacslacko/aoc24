@@ -30,3 +30,25 @@ score =: {{
 }}
 
 result_1 =: +/ score"2 regions
+
+fence_pieces =: {{
+  {{(0,y)~:y,0}}"1 y
+}}
+
+count_vertical_pieces =: {{
+  -: +/ fence"1 |: fence_pieces y
+}}
+
+count_diagonals =: {{
+  +/ (9 6)e.~ (#."1) _ 4 $ ,2]\"2 (|:"2) 2]\y
+}}
+
+count_pieces =: {{
+  (2 * count_diagonals y) + (count_vertical_pieces y) + count_vertical_pieces |:y
+}}
+
+score_by_pieces =: {{
+  (+/,y) * count_pieces y
+}}
+
+result_2 =: +/ score_by_pieces"2 regions
