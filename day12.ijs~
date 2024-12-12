@@ -14,6 +14,6 @@ find_region =: {{
 split_region =: {{
   letters =. >{:y
   region =. find_region letters
-  (region;>{.y);(region}letters,:square '.')
+  (region);(region}letters,:square '.')
 }}
  

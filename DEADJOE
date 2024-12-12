@@ -1,0 +1,40 @@
+
+*** These modified files were found in JOE when it aborted on Thu Dec 12 16:03:15 2024
+*** JOE was aborted by UNIX signal 1
+
+*** Fichier 'day12.ijs'
+data =: [;._1 LF,CR-.~1!:1 < 'day12.txt'
+num =: #data
+square =: (num,num)&$
+
+neighbors =: (+./@((i:1)&(|.!.0"0 _))){{u+.u&.|:}}
+
+find_region =: {{
+  start =. 0 i.~'.'=,y
+  field =. y = start { ,y
+  mask =. square 1 (start }) ,square 0
+  field;mask;start
+}}
+ 
+*** Fichier '(Sans nom)'
+UU
+WW
+mark
+cuda
+
+*** Fichier '(Sans nom)'
+day12.
+day12.ijs
+day12.ijs
+day12.ijs
+day12.ijs
+day12.ijs
+day12.ijs
+day12.ijs
+day12.ijs
+day12.ijs
+day12.ijs
+
+*** Fichier '* Startup Log *'
+Traitement de '/opt/homebrew/Cellar/joe/4.6/etc/joe/joerc'...Traitement de '/opt/homebrew/Cellar/joe/4.6/etc/joe/ftyperc'...Finished processing /opt/homebrew/Cellar/joe/4.6/etc/joe/ftyperc
+Finished processing /opt/homebrew/Cellar/joe/4.6/etc/joe/joerc
