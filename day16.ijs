@@ -1,43 +1,48 @@
 data =: [;._1 LF,CR-.~1!:1<'day16_apa.txt'
 
-start_row =: {.I.'S'e."1 data
-start_col =: 'S'i.~start_row{data
+size =: #data
 
-steps =: {{
-  'score dir row col' =: y
-  other_dirs =. dir -.~ i.4
-  result =. {{ (1000+score), y, row, col }}"0 other_dirs
-  'new_row new_col' =. (row, col) + dir { 1 0, 0 1, _1 0,: 0 _1
-  if. '#' ~: (<new_row, new_col){data do.
-    result =. result, ((>:score), dir, new_row, new_col)
-  end.
-  result
+distances =: _#~4**/$data
+
+pos =: {{
+  'dir row col' =. y
+  dir+4*col+size*row
 }}
 
-reached =: ,: 0, 0, start_row, start_col
-reachable =: 0 4$0
+filter =: 4#,data
 
-run =: {{
-  reachable =: steps {: reached
-  while. 1 do.
-    reachable =: /:~ reachable
-    consider =. {. reachable
-    reachable =: }. reachable
-    field =. (<(2{consider), 3{consider){data
-    if. field = 'E' do.
-      0{consider return.
-    end.
-    if. field = '#' do.
-      continue.
-    end.
-    reached =: reached, consider
-    if. 0 = 10000|#reached do.
-      echo #reached
-    end.
-    next_ones =. steps {: reached
-    already_there =: (}."1 next_ones) e. (}."1 reached, reachable)
-    reachable =: reachable, (-.already_there) # next_ones
-  end.
+costs =: {{
+  next =. y
+  backwards =. x
+  dir =. 4|next
+  base =. next - dir
+  others =. (base + dir -.~ i.4), next + backwards*4*dir{1, (-size), _1, size
+  |:(|:others,:((3#1000), 1)) #~ '#'~:others{filter
 }}
 
-result_1 =: run _
+run_2 =: {{
+  edge =. ,:y
+  backwards =. x
+  distances =. 0 y}_#~#filter  
+  while. 0<#edge do.
+    edge =. edge /: edge { distances
+    next =. {. edge
+    edge =. }. edge
+    'pts cost' =. backwards costs next
+    newdist =. cost + next { distances
+    current_dists =. pts { distances
+    edge =. edge, (newdist < current_dists) # pts
+    distances =. (newdist <. current_dists) pts}distances
+  end.
+  distances
+}}
+
+dists_from_s =: 1 run_2 pos 0, (size-2), 1
+
+result_1 =: <./ (filter='E') # dists_from_s
+
+arrived_at_e =: {.I.(filter='E') * dists_from_s = result_1
+
+dists_from_e =: _1 run_2 arrived_at_e
+
+result_2 =: #~.(]-4|])I.(=<./)dists_from_e+dists_from_s
