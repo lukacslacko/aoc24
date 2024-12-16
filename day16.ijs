@@ -2,8 +2,6 @@ data =: [;._1 LF,CR-.~1!:1<'day16_apa.txt'
 
 size =: #data
 
-distances =: _#~4**/$data
-
 pos =: {{
   'dir row col' =. y
   dir+4*col+size*row
