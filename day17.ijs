@@ -37,7 +37,7 @@ guess =: {{
   seq =: full_run y
   if. (#seq) = #PROG do.
     cnt =: >:cnt
-    echo y;seq;PROG;cnt
+    NB. echo y;seq;PROG;cnt
   end.
   if. seq -: PROG do.
     guesses =: guesses, y
@@ -46,7 +46,7 @@ guess =: {{
   if. (#seq) >: #PROG do.
     0 return.
   end.
-  if. -. (}.(-#seq){.PROG) -: }.seq do.
+  if. -. ((-#seq){.PROG) -: seq do.
     0 return.
   end.
   for_i. (8*y) + i:8 do.
@@ -56,5 +56,5 @@ guess =: {{
 }}
 
 echo (',' (I.@(' '=])) } ] )": full_run 47111006051*8
-guess 6
+guess x:6
 echo /:~guesses
