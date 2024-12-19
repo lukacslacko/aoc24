@@ -25,4 +25,3 @@ can_combine =: {{
 
 solve_1 =: {{ {. y can_combine 0$0 }}
 
-result_1 =: +/ > solve_1 &.> targets
