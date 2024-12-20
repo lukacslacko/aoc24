@@ -1,4 +1,4 @@
-data =: ,[;._1 LF,CR-.~1!:1<'day20.txt'
+data =: ,[;._1 LF,CR-.~1!:1<'day20_apa.txt'
 size =: %:#data
 distfn =:  {{
   if. 'E' = x{data do.
@@ -12,5 +12,6 @@ distfn =:  {{
 
 dist =: (size,size)$(data i.'S') distfn 0 (data i.'S')}_#~#data
 sub =: -`2:@.(_=+)
-vert =: |2-~((2}.]) sub"0 (_2}.]))dist
-horiz =: vert =: |2-~((2}.]) sub"0 (_2}.]))|:dist
+vert =: 2-~|(2}.dist)sub"0(_2}.dist)
+horiz =: 2-~|(2}.|:dist)sub"0(_2}.|:dist)
+result_1 =: +/100<:,vert,horiz
