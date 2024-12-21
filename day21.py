@@ -76,28 +76,14 @@ class RobotController:
     return cost
 
 human = Controller()
-first_robot = RobotController(human, ARROWS)
-second_robot = RobotController(first_robot, ARROWS)
-third_robot = RobotController(second_robot, NUMS)
-
-cost = 0
-for c in '029A':
-  cost += third_robot.cost_of(c)
-print(cost)
+last_controller = human
+for _ in range(25):
+  last_controller = RobotController(last_controller, ARROWS)
+last_robot = RobotController(last_controller, NUMS)
 
 total = 0
 for s in ['965A', '143A', '528A', '670A', '973A']:
 # for s in ['029A', '980A', '179A', '456A', '379A']:
-  c = third_robot.str(s)
+  c = last_robot.str(s)
   total += c * int(s[:3])
-  print(s, third_robot.str(s), total)
-
-# value = 0
-# # 235218 too high
-# for input in ['965A', '143A', '528A', '670A', '973A']:
-#   human = HumanController()
-#   setup = Numpad(RobotController(RobotController(human)))
-#   for c in input:
-#     setup.press(c)
-#   value += len(human.result()) * int(input[:3])
-# print(value)
+  print(s, last_robot.str(s), total)
