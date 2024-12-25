@@ -1,4 +1,4 @@
-data =: (#~0<#@>) <;._1 LF,(1!:1 < 'day6.txt')-.CR
+data =: (#~0<#@>) <;._1 LF,(1!:1 < '6_input.txt')-.CR
 n =: #data
 input =: ,>data
 dir =: -.&'X.#'
